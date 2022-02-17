@@ -1,24 +1,27 @@
-FROM alpine:3.5
+FROM centos:7
 
-#Create Ant Dir
-RUN mkdir -p /opt/ant/
-#Download And 1.9.8
-RUN wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.8-bin.tar.gz -P /opt/ant
-#Unpack Ant
-RUN tar -xvzf /opt/ant/apache-ant-1.9.8-bin.tar.gz -C /opt/ant/
-# Remove tar file
-RUN rm -f /opt/ant/apache-ant-1.9.8-bin.tar.gz
-#Drop Sonarqube lib
-RUN wget http://downloads.sonarsource.com/plugins/org/codehaus/sonar-plugins/sonar-ant-task/2.3/sonar-ant-task-2.3.jar -P /opt/ant/apache-ant-1.9.8/lib/
-#Install JDK 1.8
-RUN apk --update add openjdk8
-#Install GIT
-RUN apk --update add git
-#Install Curl
-RUN apk --update add curl
-#Setting Ant Home
-ENV ANT_HOME=/opt/ant/apache-ant-1.9.8
-#Setting Ant Params
-ENV ANT_OPTS="-Xms256M -Xmx512M"
-#Updating Path
-ENV PATH="${PATH}:${HOME}/bin:${ANT_HOME}/bin"
+MAINTAINER devops@outlook.com
+
+RUN mkdir /opt/tomcat/
+#RUN yum install wget
+WORKDIR /opt/tomcat/
+#RUN curl -O http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.
+COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51
+
+RUN  pwd
+RUN ls
+RUN cd apache-tomcat-8.5.51/
+RUN chmod +x *
+#RUN tar xvfz apache*.tar.gz
+#RUN mv apache-tomcat-8.5.46/* /opt/tomcat/.
+RUN yum install java-1.8.0-openjdk-devel -y
+RUN java -version
+COPY ./roshambo.war /opt/tomcat/webapps/
+RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51/bin/
+
+WORKDIR /opt/tomcat/webapps
+RUN ls 
+
+EXPOSE 8080
+
+CMD ["/opt/tomcat/apache-tomcat-8.5.51/bin/catalina.sh", "run"]
