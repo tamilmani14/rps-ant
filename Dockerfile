@@ -17,7 +17,7 @@ RUN chmod +x *
 RUN yum install java-1.8.0-openjdk-devel -y
 RUN java -version
 COPY ./target/roshambo.war /opt/tomcat/webapps/
-RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51/bin/
+RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51
 
 WORKDIR /opt/tomcat/webapps
 RUN ls 
