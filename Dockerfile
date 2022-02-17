@@ -3,7 +3,7 @@ FROM centos:7
 MAINTAINER devops@outlook.com
 
 RUN mkdir /opt/tomcat/
-RUN yum install wget
+#RUN yum install wget
 WORKDIR /opt/tomcat/
 RUN curl -O http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.
 COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51/bin
