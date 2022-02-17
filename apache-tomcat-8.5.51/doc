@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+            stages {
+                stage('GitHub Jenkins Ant Build') {
+                    steps {
+                        git 'https://github.com/tamilmani14/rps-ant.git'
+                        sh 'ant clean compile test package war'
+                    }
+                }
+                
+            stage('ant build to s3') {
+                steps {
+                        archiveArtifacts 'target/*.war'
+                        withAWS(region:'us-east-1',credentials:'aws_credential') {
+                        sh 'aws s3 cp ./target/roshambo.war s3://anta/roshambo.war'
+                            }
+                        }
+                }
+                stage('docker') {
+                    steps {
+                        sh 'docker rmi  -f tomcat:latest'
+                        sh 'docker build -t tomcat:latest .'
+                        sh 'docker rm -f myapp'
+                        sh 'docker run -itd --name myapp -p 8087:8080 tomcat:latest'
+                    }
+                }
+            }    
+        }
