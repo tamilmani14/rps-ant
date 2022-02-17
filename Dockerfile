@@ -6,7 +6,7 @@ RUN mkdir /opt/tomcat/
 #RUN yum install wget
 WORKDIR /opt/tomcat/
 #RUN curl -O http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.
-COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51
+COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51/bin
 
 RUN  pwd
 RUN ls
@@ -17,11 +17,11 @@ RUN chmod +x *
 RUN yum install java-1.8.0-openjdk-devel -y
 RUN java -version
 COPY ./target/roshambo.war /opt/tomcat/webapps/
-RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51
+RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51/bin
 
 WORKDIR /opt/tomcat/webapps
 RUN ls 
 
 EXPOSE 8080
 
-CMD ["/opt/tomcat/apache-tomcat-8.5.51/catalina.sh", "run"]
+CMD ["/opt/tomcat/apache-tomcat-8.5.51/bin/catalina.sh", "run"]
