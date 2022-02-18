@@ -25,4 +25,4 @@ RUN ls
 
 EXPOSE 8080
 
-CMD ["/opt/tomcat/apache-tomcat-8.5.51/bin/catalina.sh", "run"]
+CMD ["/opt/tomcat/apache-tomcat-8.5.51/bin/catalina.sh", "start"]
