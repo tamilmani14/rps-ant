@@ -7,6 +7,7 @@ RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat/
 #RUN curl -O http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.45/bin/apache-tomcat-8.5.45.tar.
 COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51
+RUN ls -lrt
 
 RUN  pwd
 RUN ls
