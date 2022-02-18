@@ -9,9 +9,10 @@ WORKDIR /opt/tomcat/
 COPY  apache-tomcat-8.5.51  /opt/tomcat/apache-tomcat-8.5.51
 RUN ls -lrt
 
+RUN cd apache-tomcat-8.5.51/bin/
+
 RUN  pwd
-RUN ls
-RUN cd apache-tomcat-8.5.51/
+RUN ls -lrt
 RUN chmod +x *
 #RUN tar xvfz apache*.tar.gz
 #RUN mv apache-tomcat-8.5.46/* /opt/tomcat/.
