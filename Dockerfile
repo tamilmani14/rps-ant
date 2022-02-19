@@ -17,7 +17,7 @@ RUN chmod +x *
 #RUN mv apache-tomcat-8.5.46/* /opt/tomcat/.
 RUN yum install java-1.8.0-openjdk-devel -y
 RUN java -version
-COPY ./target/roshambo.war /opt/tomcat/webapps/
+RUN aws s3 COPY s3://${Bucketname}/${Objectname}/roshambo.war /opt/tomcat/webapps/
 RUN chmod a+rx /opt /opt/tomcat/ /opt/tomcat/apache-tomcat-8.5.51/bin/
 
 WORKDIR /opt/tomcat/webapps
